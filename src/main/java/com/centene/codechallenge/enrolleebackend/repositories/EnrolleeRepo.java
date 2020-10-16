@@ -6,5 +6,6 @@ import com.centene.codechallenge.enrolleebackend.models.Enrollee;
 
 public interface EnrolleeRepo extends MongoRepository<Enrollee,Integer>
 {
-
+	public Enrollee findById(String id);
+	public void deleteById(String id);
 }

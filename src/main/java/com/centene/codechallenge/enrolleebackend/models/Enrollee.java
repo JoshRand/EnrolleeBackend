@@ -1,16 +1,21 @@
 package com.centene.codechallenge.enrolleebackend.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "enrollees")
 public class Enrollee
 {	
+	
 	@Id
-	private int id;
+	private String id;
 	private boolean activationStatus;
 	
 	private String firstName;
@@ -18,43 +23,42 @@ public class Enrollee
 	private String homeNumber;
 	private String cellNumber;
 	private LocalDate birthDate;
-	
+	@DBRef 
 	private List<Dependent> dependents;
-	
-	public Enrollee(String firstName, String lastName, boolean activationStatus, String birthDate,
+
+	@Autowired
+	public Enrollee(String firstName, String lastName, boolean activationStatus, LocalDate birthDate,
 			String homeNumber, String cellNumber, List<Dependent> dependents)
 	{
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.activationStatus = activationStatus;
-		this.birthDate = LocalDate.parse(birthDate);
+		this.birthDate = birthDate;
 		this.homeNumber = homeNumber;
 		this.cellNumber = cellNumber;
 		this.dependents = dependents;
 	}
-	
-	public void addDependent(Dependent dependent)
+
+	public List<Dependent> getDependents()
 	{
-		if(!dependents.contains(dependent))
-			dependents.add(dependent);
-	}
-	
-	public void delDependent(Dependent dependent)
-	{
-		if(dependents.contains(dependent))
-			dependents.remove(dependent);
+		return dependents;
 	}
 
-	public void modDependent(Dependent dependent)
+	public void setDependents(List<Dependent> dependents)
 	{
-		
+		this.dependents = dependents;
 	}
-	
-//	public int getId()
-//	{
-//		return id;
-//	}
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 
 	public boolean isActivationStatus()
 	{
@@ -114,6 +118,14 @@ public class Enrollee
 	public void setBirthDate(LocalDate birthDate)
 	{
 		this.birthDate = birthDate;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Enrollee [id=" + id + ", activationStatus=" + activationStatus + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", homeNumber=" + homeNumber + ", cellNumber=" + cellNumber
+				+ ", birthDate=" + birthDate + ", dependents=" + dependents + "]";
 	}
 	
 	
