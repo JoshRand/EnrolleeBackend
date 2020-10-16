@@ -9,6 +9,6 @@ public interface EnrolleeDao
 	public boolean add(Enrollee enrollee);
 	public boolean delete(String enrolleeId);
 	public boolean update(Enrollee enrollee);
-	public Enrollee FindById(String enrolleeId);
+	public Enrollee findById(String enrolleeId);
 	public List<Enrollee> findAll();
 }

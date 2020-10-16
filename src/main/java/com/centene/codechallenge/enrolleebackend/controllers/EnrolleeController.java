@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.centene.codechallenge.enrolleebackend.dao.EnrolleeDao;
 import com.centene.codechallenge.enrolleebackend.models.Dependent;
 import com.centene.codechallenge.enrolleebackend.models.Enrollee;
+import com.centene.codechallenge.enrolleebackend.service.DependentService;
 import com.centene.codechallenge.enrolleebackend.service.EnrolleeService;
 
 @RestController
@@ -27,6 +29,9 @@ public class EnrolleeController
 	
 	@Autowired
 	EnrolleeService enrolleeService;
+	
+	@Autowired
+	DependentService dependentService;
 	
 	// Add a new Enrollee
 	@PostMapping
@@ -42,12 +47,11 @@ public class EnrolleeController
 	@PatchMapping
 	public ResponseEntity<Enrollee> modEnrollee(@RequestBody Enrollee modifiedEnrollee)
 	{
-		System.out.println(modifiedEnrollee.toString());
 		return new ResponseEntity<Enrollee>(enrolleeService.updateEnrollee(modifiedEnrollee),
 				(modifiedEnrollee.getId() == null)?HttpStatus.BAD_REQUEST:HttpStatus.ACCEPTED);
 	}
 	
-	// Modify Existing Enrollee
+	// Delete Existing Enrollee
 	@DeleteMapping
 	public ResponseEntity<String> delEnrollee(@RequestParam String enrolleeId)
 	{
@@ -56,24 +60,8 @@ public class EnrolleeController
 		return new ResponseEntity<String>("Deleted enrollee id="+enrolleeId+" false",HttpStatus.CONFLICT);
 	}
 	
-	// Add dependant to Enrollee
-	@PostMapping("/dependent")
-	public ResponseEntity<String> addDepenedent(@RequestParam String enrolleeId, @RequestParam String firstName, @RequestParam String lastName,
-			@RequestParam String homeNumber, @RequestParam String cellNumber, @RequestParam String birthDate)
-	{
-		Dependent dependent = new Dependent(firstName,lastName,homeNumber,cellNumber,LocalDate.parse(birthDate));
-		System.out.println(dependent.toString());
-		return new ResponseEntity<String>("Adding dependent to Enrollee?= "+enrolleeService.addDependent(dependent,enrolleeId),HttpStatus.CREATED);
-	}
 	
-	// delete dependant to Enrollee
-	@DeleteMapping("/dependent")
-	public ResponseEntity<Integer> delDepenedent(@RequestParam String dependentId)
-	{
-		return new ResponseEntity<Integer>(5,HttpStatus.ACCEPTED);
-	}
-	
-	// Returns an enrollee
+	// Returns an Enrollees
 	@GetMapping
 	public ResponseEntity<Enrollee> getEnrollee(@RequestParam String enrolleeId)
 	{

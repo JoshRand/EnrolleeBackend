@@ -32,17 +32,17 @@ public class EnrolleeServiceImpl implements EnrolleeService
 	{
 		try
 		{
-			Enrollee enrollee = enrolleeDao.FindById(modifiedEnrollee.getId());
+			Enrollee enrollee = enrolleeDao.findById(modifiedEnrollee.getId());
 			System.out.println(enrollee.toString());
 			if(modifiedEnrollee.isActivationStatus() != true && modifiedEnrollee.isActivationStatus() != false)
 				enrollee.setActivationStatus(modifiedEnrollee.isActivationStatus());
-			if(modifiedEnrollee.getFirstName() != null)
+			if(modifiedEnrollee.getFirstName() != null && !modifiedEnrollee.getFirstName().equals(""))
 				enrollee.setFirstName(modifiedEnrollee.getFirstName());
-			if(modifiedEnrollee.getLastName() != null)
+			if(modifiedEnrollee.getLastName() != null && !modifiedEnrollee.getLastName().equals(""))
 				enrollee.setLastName(modifiedEnrollee.getLastName());
-			if(modifiedEnrollee.getHomeNumber() != null)
+			if(modifiedEnrollee.getHomeNumber() != null && !modifiedEnrollee.getHomeNumber().equals(""))
 				enrollee.setHomeNumber(modifiedEnrollee.getHomeNumber());
-			if(modifiedEnrollee.getCellNumber() != null)
+			if(modifiedEnrollee.getCellNumber() != null && !modifiedEnrollee.getCellNumber().equals(""))
 				enrollee.setCellNumber(modifiedEnrollee.getCellNumber());
 			enrolleeDao.add(enrollee);
 			
@@ -69,22 +69,8 @@ public class EnrolleeServiceImpl implements EnrolleeService
 	@Override
 	public Enrollee findById(String enrolleeId)
 	{
-		return enrolleeDao.FindById(enrolleeId);
+		return enrolleeDao.findById(enrolleeId);
 	}
 
-	@Override
-	public boolean addDependent(Dependent dependent, String enrolleeId)
-	{
-		List<Dependent> dependentList = new ArrayList<Dependent>();
-		Enrollee enrollee = enrolleeDao.FindById(enrolleeId);
-		if(enrollee == null)
-		{
-			return false;
-		}
-		Dependent savedDependent = dependentDao.add(dependent);
-		dependentList = enrollee.getDependents();
-		dependentList.add(savedDependent);
-		return enrolleeDao.add(enrollee);
-	}
 
 }

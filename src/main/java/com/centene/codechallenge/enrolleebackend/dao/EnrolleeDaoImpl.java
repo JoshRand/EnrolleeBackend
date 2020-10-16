@@ -71,7 +71,7 @@ public class EnrolleeDaoImpl implements EnrolleeDao
 	}
 
 	@Override
-	public Enrollee FindById(String enrolleeId)
+	public Enrollee findById(String enrolleeId)
 	{
 		return enrolleeRepo.findById(enrolleeId);
 	}

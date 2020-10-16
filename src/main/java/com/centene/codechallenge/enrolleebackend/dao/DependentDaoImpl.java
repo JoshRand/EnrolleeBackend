@@ -1,5 +1,7 @@
 package com.centene.codechallenge.enrolleebackend.dao;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +23,13 @@ public class DependentDaoImpl implements DependentDao
 	@Override
 	public void delete(String dependentId)
 	{
-		// TODO Auto-generated method stub
-		
+		dependentRepo.deleteById(dependentId);
+	}
+
+	@Override
+	public Dependent findById(String dependentId)
+	{
+		return dependentRepo.findById(dependentId);
 	}
 
 }
