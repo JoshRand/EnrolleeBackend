@@ -1,6 +1,6 @@
 # EnrolleeBackend
 
-EnrolleeBackend is a Java and Spring Boot based web application backend.  Its purpose is to provide simple API request routes for the use of manipulating data in a MongoDB database. The documentation for the API can be found here: https://documenter.getpostman.com/view/12598764/TVRoZ6xj
+EnrolleeBackend is a Java and Spring Boot based web application backend.  Its purpose is to provide simple API request routes for the use of manipulating data in a MongoDB database.
 
 ## API Documentation & Usage
 [POSTMAN DOCUMENTATION](https://documenter.getpostman.com/view/12598764/TVRoZ6xj)
