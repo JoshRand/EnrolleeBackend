@@ -6,7 +6,7 @@ EnrolleeBackend is a Java and Spring Boot based web application backend.  Its pu
 [POSTMAN DOCUMENTATION](https://documenter.getpostman.com/view/12598764/TVRoZ6xj)
 ## Installation
 
-To use this application you'll need Java 14 or higher, Eclipse, and a MongoDB server. 
+To use this application you'll need Java 8 or higher, Eclipse, and a MongoDB server. 
 Once installed and imported into your workplace you'll need to edit the application.properties file in order to connect to the database of your liking. Replace \<AdminName\>, \<Password\>, \<DatabaseAddress\> with your desired external MongoDB database information, or you can comment out the MongoDB Atlas Database conneciton properties and use your local MongoDB database.
 
 ```bash
